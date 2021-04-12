@@ -1,4 +1,4 @@
-var inputText = document.querySelector("#input-test");
+var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
 
 var cities = [
