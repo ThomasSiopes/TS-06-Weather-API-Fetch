@@ -46,7 +46,6 @@ var cities = [
 
 function getApi() {
     var inputObject;
-    var input = inputText.value;
     for(var i = 0; i < cities.length; ++i) {
         if(input == cities[i].name) {
             inputObject = cities[i];
@@ -66,4 +65,5 @@ function getApi() {
         });
 }
 
+var input = inputText.value;
 inputForm.addEventListener('submit', getApi);
