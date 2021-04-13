@@ -2,49 +2,6 @@ var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
 
-// var cities = [
-//     {
-//         "name": "Austin",
-//         "lat": 30.266666,
-//         "long": -97.733330 
-//     },
-//     {
-//         "name": "Chicago",
-//         "lat": 	41.881832,
-//         "long": -87.623177
-//     },
-//     {
-//         "name": "New York",
-//         "lat": 	40.785091,
-//         "long": -73.968285
-//     },
-//     {
-//         "name": "Orlando",
-//         "lat": 	28.474386,
-//         "long": -81.468193
-//     },
-//     {
-//         "name": "San Francisco",
-//         "lat": 	37.773972,
-//         "long": -122.431297
-//     },
-//     {
-//         "name": "Seattle",
-//         "lat": 47.443546,
-//         "long": -122.301659
-//     },
-//     {
-//         "name": "Denver",
-//         "lat": 39.742043,
-//         "long": -104.991531
-//     },
-//     {
-//         "name": "Atlanta",
-//         "lat": 	33.640411,
-//         "long": -84.419853
-//     },
-// ]
-
 function getApi(event) {
     event.preventDefault();
     var inputValue = inputText.value;
@@ -56,43 +13,61 @@ function getApi(event) {
       }
 
     // var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=62fc4b9361922696dc4c18ebfc0a82b3';
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3'
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3';
 
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            newElement = document.createElement("h1");
-            newElement.textContent = inputValue;
-            forecast.appendChild(newElement);
+            // console.log(data);
+            // newElement = document.createElement("h1");
+            // newElement.textContent = data.name;
+            // forecast.appendChild(newElement);
 
-            //Temp
-            newElement = document.createElement("p");
-            // newElement.textContent = "Temp: " + kelvinToFarenheit(data.main.temp) + " °F";
-            newElement.textContent = "Temp: " + data.main.temp + " °F";
-            forecast.appendChild(newElement);
+            // //Temp
+            // newElement = document.createElement("p");
+            // newElement.textContent = "Temp: " + data.main.temp + " °F";
+            // forecast.appendChild(newElement);
 
-            //Wind
-            newElement = document.createElement("p");
-            // newElement.textContent = "Wind: " + metersPerSecToMPH(data.wind.speed) + " MPH";
-            newElement.textContent = "Wind: " + data.wind.speed + " MPH";
-            forecast.appendChild(newElement);
+            // //Wind
+            // newElement = document.createElement("p");
+            // newElement.textContent = "Wind: " + data.wind.speed + " MPH";
+            // forecast.appendChild(newElement);
 
-            //Humidity
-            newElement = document.createElement("p");
-            newElement.textContent = "Humidity: " + data.main.humidity + " %";
-            forecast.appendChild(newElement);
+            // //Humidity
+            // newElement = document.createElement("p");
+            // newElement.textContent = "Humidity: " + data.main.humidity + " %";
+            // forecast.appendChild(newElement);
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ data.coord.lat +'&lon=' + data.coord.lon + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    console.log(data);
+                    newElement = document.createElement("h1");
+                    newElement.textContent = data.name;
+                    forecast.appendChild(newElement);
 
-            //UV Index
-        });
-}
+                    //Temp
+                    newElement = document.createElement("p");
+                    newElement.textContent = "Temp: " + data.current.temp + " °F";
+                    forecast.appendChild(newElement);
 
-function kelvinToFarenheit (kelvinTemp) {
-    return ((kelvinTemp-273.15)*(9/5)+32);
-}
+                    //Wind
+                    newElement = document.createElement("p");
+                    newElement.textContent = "Wind: " + data.current.wind_speed + " MPH";
+                    forecast.appendChild(newElement);
 
-function metersPerSecToMPH (metersPerSec) {
-    return metersPerSec*2.237;
+                    //Humidity
+                    newElement = document.createElement("p");
+                    newElement.textContent = "Humidity: " + data.current.humidity + " %";
+                    forecast.appendChild(newElement);
+
+                    //UV Index
+                    newElement = document.createElement("p");
+                    newElement.textContent = "UV Index: " + data.current.uvi;
+                    forecast.appendChild(newElement);
+                });
+        })
 }
