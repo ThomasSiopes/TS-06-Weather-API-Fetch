@@ -56,7 +56,7 @@ function getApi(event) {
       }
 
     // var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=62fc4b9361922696dc4c18ebfc0a82b3';
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=62fc4b9361922696dc4c18ebfc0a82b3'
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3'
 
     fetch(requestUrl)
         .then(function (response) {
@@ -70,12 +70,14 @@ function getApi(event) {
 
             //Temp
             newElement = document.createElement("p");
-            newElement.textContent = "Temp: " + kelvinToFarenheit(data.main.temp) + " °F";
+            // newElement.textContent = "Temp: " + kelvinToFarenheit(data.main.temp) + " °F";
+            newElement.textContent = "Temp: " + data.main.temp + " °F";
             forecast.appendChild(newElement);
 
             //Wind
             newElement = document.createElement("p");
-            newElement.textContent = "Wind: " + metersPerSecToMPH(data.wind.speed) + " MPH";
+            // newElement.textContent = "Wind: " + metersPerSecToMPH(data.wind.speed) + " MPH";
+            newElement.textContent = "Wind: " + data.wind.speed + " MPH";
             forecast.appendChild(newElement);
 
             //Humidity
