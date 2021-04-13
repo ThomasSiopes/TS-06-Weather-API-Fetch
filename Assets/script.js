@@ -59,11 +59,12 @@ function getApi(event) {
             return response.json();
         })
         .then(function (data) {
-            newObject = data;
             console.log(data);
-            console.log("Object Version: " + newObject);
             newElement = document.createElement("h1");
             newElement.textContent = inputValue;
+            forecast.appendChild(newElement);
+            newElement = document.createElement("p");
+            newElement.textContent = "Temp: " + kelvinToFarenheit(data.main.temp);
             forecast.appendChild(newElement);
         });
 }
