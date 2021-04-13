@@ -51,6 +51,10 @@ function getApi(event) {
     var newElement;
     var newObject;
 
+    while (forecast.firstChild) {
+        forecast.removeChild(forecast.lastChild);
+      }
+
     // var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=62fc4b9361922696dc4c18ebfc0a82b3';
     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=62fc4b9361922696dc4c18ebfc0a82b3'
 
@@ -63,12 +67,30 @@ function getApi(event) {
             newElement = document.createElement("h1");
             newElement.textContent = inputValue;
             forecast.appendChild(newElement);
+
+            //Temp
             newElement = document.createElement("p");
-            newElement.textContent = "Temp: " + kelvinToFarenheit(data.main.temp);
+            newElement.textContent = "Temp: " + kelvinToFarenheit(data.main.temp) + " °F";
             forecast.appendChild(newElement);
+
+            //Wind
+            newElement = document.createElement("p");
+            newElement.textContent = "Wind: " + metersPerSecToMPH(data.wind.speed) + " MPH";
+            forecast.appendChild(newElement);
+
+            //Humidity
+            newElement = document.createElement("p");
+            newElement.textContent = "Humidity: " + data.main.humidity + " %";
+            forecast.appendChild(newElement);
+
+            //UV Index
         });
 }
 
 function kelvinToFarenheit (kelvinTemp) {
     return ((kelvinTemp-273.15)*(9/5)+32);
+}
+
+function metersPerSecToMPH (metersPerSec) {
+    return metersPerSec*2.237;
 }
