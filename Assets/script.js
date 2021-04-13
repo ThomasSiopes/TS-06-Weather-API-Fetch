@@ -1,5 +1,6 @@
 var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
+var forecast = document.querySelector("#today-forecast");
 
 // var cities = [
 //     {
@@ -47,7 +48,8 @@ var inputForm = document.querySelector("#input-form");
 function getApi(event) {
     event.preventDefault();
     var inputValue = inputText.value;
-    alert("Value: " + inputValue);
+    var newElement;
+    var newObject;
 
     // var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=62fc4b9361922696dc4c18ebfc0a82b3';
     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=62fc4b9361922696dc4c18ebfc0a82b3'
@@ -57,6 +59,15 @@ function getApi(event) {
             return response.json();
         })
         .then(function (data) {
+            newObject = data;
             console.log(data);
+            console.log("Object Version: " + newObject);
+            newElement = document.createElement("h1");
+            newElement.textContent = inputValue;
+            forecast.appendChild(newElement);
         });
+}
+
+function kelvinToFarenheit (kelvinTemp) {
+    return ((kelvinTemp-273.15)*(9/5)+32);
 }
