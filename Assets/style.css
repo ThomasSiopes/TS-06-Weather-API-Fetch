@@ -6,3 +6,8 @@
 button {
     width: 100%;
 }
+
+.forecast-day {
+    color: white;
+    font-size: 10px;
+}
