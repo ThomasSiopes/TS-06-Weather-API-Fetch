@@ -134,5 +134,9 @@ function createHistoryButton(inputValue) {
     newElement.classList.add("btn");
     newElement.classList.add("btn-secondary");
     newElement.textContent = inputValue;
-    newElement.addEventListener("click", generateWeatherData(inputValue));
+    newElement.addEventListener("click", function(event) {
+        event.preventDefault();
+        alert(inputValue);
+    });
+    historyButtons.appendChild(newElement);
 }
