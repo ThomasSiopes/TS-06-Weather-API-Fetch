@@ -1,7 +1,7 @@
 var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
-var futureForecast = document.getElementsByClassName(".forecast-day");
+var futureForecast = document.getElementsByClassName("forecast-day");
 
 function getApi(event) {
     event.preventDefault();
