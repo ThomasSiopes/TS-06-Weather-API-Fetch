@@ -41,8 +41,8 @@ function generateWeatherData(inputValue) {
                 })
                 .then(function(data) {
                     console.log(data);
-                    forecast.setAttribute("class", "border");
-                    forecast.setAttribute("class", " border-dark");
+                    forecast.classList.add("border");
+                    forecast.classList.add("border-dark");
 
                     //Temp
                     newElement = document.createElement("p");
@@ -75,7 +75,7 @@ function generateWeatherData(inputValue) {
                 
                     //5-Day Forecast
                     for(var i = 0; i < futureForecast.length; ++i){
-                        futureForecast[i].setAttribute("class", "bg-dark");
+                        futureForecast[i].classList.add("bg-dark");
                         
                         //Date
                         newElement = document.createElement("h5");
