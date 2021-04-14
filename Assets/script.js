@@ -144,3 +144,8 @@ function createHistoryButton(inputValue) {
     });
     historyButtons.appendChild(newElement);
 }
+
+function clearHistory(event) {
+    event.preventDefault();
+    localStorage.clear();
+}
