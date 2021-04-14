@@ -7,12 +7,20 @@ var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + 
 
 function getApi(event) {
     event.preventDefault();
-    var inputValue = inputText.value;
+    generateWeatherData(inputText.value);
+}
+
+function generateWeatherData(inputValue) {
     var newElement;
 
     while (forecast.firstChild) {
         forecast.removeChild(forecast.lastChild);
-      }
+    }
+    for(var i = 0; i < futureForecast.length; ++i) {
+        while(futureForecast[i].firstChild) {
+            futureForecast[i].removeChild(futureForecast[i].lastChild);
+        }
+    }
 
     // var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=62fc4b9361922696dc4c18ebfc0a82b3';
     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3';
