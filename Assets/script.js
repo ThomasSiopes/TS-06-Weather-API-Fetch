@@ -16,7 +16,7 @@ function generateWeatherData(inputValue) {
     var newElement;
 
     while (historyButtons.firstChild) {
-        forecast.removeChild(historyButtons.lastChild);
+        historyButtons.removeChild(historyButtons.lastChild);
     }
     while (forecast.firstChild) {
         forecast.removeChild(forecast.lastChild);
