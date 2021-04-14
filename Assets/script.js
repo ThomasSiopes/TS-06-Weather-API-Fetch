@@ -59,10 +59,10 @@ function getApi(event) {
                         newElement.setAttribute("class", "bg-danger");
                     }
                     forecast.appendChild(newElement);
-                })
-                // 5-day Forecast
-                .then(function(data) {
+                
+                    //5-Day Forecast
                     for(var i = 0; i < futureForecast.length; ++i){
+                        console.log("Index " + i);
                         //Temp
                         newElement = document.createElement("p");
                         newElement.textContent = "Temp: " + data.daily[i].temp.day + " °F";
