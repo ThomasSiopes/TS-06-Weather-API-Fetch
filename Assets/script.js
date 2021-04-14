@@ -3,7 +3,7 @@ var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
 var dateNum = new Date();
-var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("dddd, MMMM Do");
+var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("MM-DD-YYYY");
 
 function getApi(event) {
     event.preventDefault();
@@ -24,7 +24,9 @@ function getApi(event) {
         .then(function (data) {
             newElement = document.createElement("h1");
             newElement.textContent = data.name + " (" + currentDate + ")";
+            newElement.setAttribute("class", "fw-bold");
             forecast.appendChild(newElement);
+            newElement.classList.remove("fw-bold");
             
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ data.coord.lat +'&lon=' + data.coord.lon + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3')
                 .then(function (response) {
@@ -65,6 +67,12 @@ function getApi(event) {
                     //5-Day Forecast
                     for(var i = 0; i < futureForecast.length; ++i){
                         console.log("Index " + i);
+                        //Date
+                        newElement = document.createElement("h5");
+                        currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+2+i)).format("MM-DD-YYYY");
+                        newElement.textContent = currentDate;
+                        futureForecast[i].appendChild(newElmenet);
+
                         //Temp
                         newElement = document.createElement("p");
                         newElement.textContent = "Temp: " + data.daily[i].temp.day + " °F";
