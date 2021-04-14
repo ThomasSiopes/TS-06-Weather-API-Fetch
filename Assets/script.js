@@ -33,13 +33,18 @@ function generateWeatherData(inputValue) {
         .then(function (data) {
             //Creates buttons from local storage
             var history = JSON.parse(localStorage.getItem("history"));
-            var match = 0;
-            for(var i = 0; i < history.length; ++i) {
-                if(history[i] === inputValue) {
-                    match = 1;
+            if(history) {
+                var match = 0;
+                for(var i = 0; i < history.length; ++i) {
+                    if(history[i] === inputValue) {
+                        match = 1;
+                    }
+                }
+                if(match == 0) {
+                    history.push(inputValue);
                 }
             }
-            if(match == 0) {
+            else {
                 history.push(inputValue);
             }
             for(var i = 0; i < history.length; ++i) {
