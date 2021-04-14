@@ -5,7 +5,7 @@ var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
 var label = document.querySelector("#label-5-day");
 var dateNum = new Date();
-var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("MM/DD/YYYY");
+var currentDate;
 
 function getApi(event) {
     event.preventDefault();
@@ -57,6 +57,7 @@ function generateWeatherData(inputValue) {
             localStorage.setItem("history", JSON.stringify(history));
 
             //Generates date and other forecast information
+            currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("MM/DD/YYYY");
             newElement = document.createElement("h1");
             newElement.textContent = data.name + " (" + currentDate + ")";
             newElement.classList.add("fw-bold");
@@ -140,7 +141,7 @@ function createHistoryButton(inputValue) {
     newElement.textContent = inputValue;
     newElement.addEventListener("click", function(event) {
         event.preventDefault();
-        alert(inputValue);
+        generateWeatherData(inputValue);
     });
     historyButtons.appendChild(newElement);
 }
