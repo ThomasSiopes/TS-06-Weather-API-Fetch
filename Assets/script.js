@@ -15,6 +15,9 @@ function getApi(event) {
 function generateWeatherData(inputValue) {
     var newElement;
 
+    while (historyButtons.firstChild) {
+        forecast.removeChild(historyButtons.lastChild);
+    }
     while (forecast.firstChild) {
         forecast.removeChild(forecast.lastChild);
     }
@@ -133,6 +136,7 @@ function createHistoryButton(inputValue) {
     newElement = document.createElement("button");
     newElement.classList.add("btn");
     newElement.classList.add("btn-secondary");
+    newElement.classList.add("mb-2");
     newElement.textContent = inputValue;
     newElement.addEventListener("click", function(event) {
         event.preventDefault();
