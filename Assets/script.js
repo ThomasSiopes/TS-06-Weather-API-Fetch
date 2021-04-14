@@ -2,6 +2,7 @@ var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
+var label = document.querySelector(".label-5-day");
 var dateNum = new Date();
 var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("MM/DD/YYYY");
 
@@ -74,6 +75,8 @@ function generateWeatherData(inputValue) {
                     forecast.appendChild(newElement);
                 
                     //5-Day Forecast
+                    labal.textContent = "5-Day Forecast:";
+                    
                     for(var i = 0; i < futureForecast.length; ++i){
                         futureForecast[i].classList.add("bg-dark");
                         
