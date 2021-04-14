@@ -32,7 +32,7 @@ function generateWeatherData(inputValue) {
         .then(function (data) {
             newElement = document.createElement("h1");
             newElement.textContent = data.name + " (" + currentDate + ")";
-            newElement.setAttribute("class", "fw-bold");
+            newElement.classList.add("fw-bold");
             forecast.appendChild(newElement);
             newElement.classList.remove("fw-bold");
             
@@ -63,20 +63,20 @@ function generateWeatherData(inputValue) {
                     //UV Index
                     newElement = document.createElement("p");
                     newElement.textContent = "UV Index: " + data.current.uvi;
-                    newElement.setAttribute("class", "text-white");
+                    newElement.classList.add("text-white");
                     if(data.current.uvi <= 2) {
-                        newElement.setAttribute("class", "bg-success");
+                        newElement.classList.add("bg-success");
                     }
                     else if(data.current.uvi <= 5) {
-                        newElement.setAttribute("class", "bg-warning");
+                        newElement.classList.add("bg-warning");
                     } else {
-                        newElement.setAttribute("class", "bg-danger");
+                        newElement.classList.add("bg-danger");
                     }
                     forecast.appendChild(newElement);
                 
                     //5-Day Forecast
                     labal.textContent = "5-Day Forecast:";
-                    
+
                     for(var i = 0; i < futureForecast.length; ++i){
                         futureForecast[i].classList.add("bg-dark");
                         
