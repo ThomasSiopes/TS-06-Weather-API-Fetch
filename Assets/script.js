@@ -3,7 +3,7 @@ var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
 var dateNum = new Date();
-var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("MM-DD-YYYY");
+var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("MM/DD/YYYY");
 
 function getApi(event) {
     event.preventDefault();
@@ -69,9 +69,9 @@ function getApi(event) {
                         console.log("Index " + i);
                         //Date
                         newElement = document.createElement("h5");
-                        currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+2+i)).format("MM-DD-YYYY");
+                        currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+2+i)).format("MM/DD/YYYY");
                         newElement.textContent = currentDate;
-                        futureForecast[i].appendChild(newElmenet);
+                        futureForecast[i].appendChild(newElement);
 
                         //Temp
                         newElement = document.createElement("p");
