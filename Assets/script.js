@@ -2,12 +2,13 @@ var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
+var dateNum = new Date();
+var currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+1)).format("dddd, MMMM Do");
 
 function getApi(event) {
     event.preventDefault();
     var inputValue = inputText.value;
     var newElement;
-    var newObject;
 
     while (forecast.firstChild) {
         forecast.removeChild(forecast.lastChild);
@@ -21,15 +22,16 @@ function getApi(event) {
             return response.json();
         })
         .then(function (data) {
+            newElement = document.createElement("h1");
+            newElement.textContent = data.name + " (" + currentDate + ")";
+            forecast.appendChild(newElement);
+            
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ data.coord.lat +'&lon=' + data.coord.lon + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3')
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function(data) {
                     console.log(data);
-                    newElement = document.createElement("h1");
-                    newElement.textContent = data.name;
-                    forecast.appendChild(newElement);
 
                     //Temp
                     newElement = document.createElement("p");
