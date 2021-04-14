@@ -75,7 +75,7 @@ function generateWeatherData(inputValue) {
                     forecast.appendChild(newElement);
                 
                     //5-Day Forecast
-                    labal.textContent = "5-Day Forecast:";
+                    label.textContent = "5-Day Forecast:";
 
                     for(var i = 0; i < futureForecast.length; ++i){
                         futureForecast[i].classList.add("bg-dark");
