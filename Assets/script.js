@@ -32,7 +32,8 @@ function generateWeatherData(inputValue) {
         })
         .then(function (data) {
             //Creates buttons from local storage
-            var history = JSON.parse(localStorage.getItem("history"));
+            var history = []
+            history = JSON.parse(localStorage.getItem("history"));
             if(history) {
                 var match = 0;
                 for(var i = 0; i < history.length; ++i) {
