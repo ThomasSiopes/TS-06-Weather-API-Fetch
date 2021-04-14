@@ -1,5 +1,6 @@
 var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
+var historyButtons = document.querySelector("#local-storage-buttons");
 var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
 var label = document.querySelector("#label-5-day");
@@ -30,6 +31,23 @@ function generateWeatherData(inputValue) {
             return response.json();
         })
         .then(function (data) {
+            //Creates buttons from local storage
+            var history = JSON.parse(localStorage.getItem("history"));
+            var match = 0;
+            for(var i = 0; i < history.length; ++i) {
+                if(history[i] === inputValue) {
+                    match = 1;
+                }
+            }
+            if(match == 0) {
+                history.push(inputValue);
+            }
+            for(var i = 0; i < history.length; ++i) {
+                createHistoryButton(inputValue);
+            }
+            localStorage.setItem("history", JSON.stringify(history));
+
+            //Generates date and other forecast information
             newElement = document.createElement("h1");
             newElement.textContent = data.name + " (" + currentDate + ")";
             newElement.classList.add("fw-bold");
@@ -103,4 +121,12 @@ function generateWeatherData(inputValue) {
                     }
                 });
         })
+}
+
+function createHistoryButton(inputValue) {
+    newElement = document.createElement("button");
+    newElement.classList.add("btn");
+    newElement.classList.add("btn-secondary");
+    newElement.textContent = inputValue;
+    newElement.addEventListener("click", generateWeatherData(inputValue));
 }
