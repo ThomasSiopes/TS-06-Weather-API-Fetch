@@ -22,7 +22,6 @@ function generateWeatherData(inputValue) {
         }
     }
 
-    // var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=62fc4b9361922696dc4c18ebfc0a82b3';
     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3';
 
     fetch(requestUrl)
@@ -42,6 +41,8 @@ function generateWeatherData(inputValue) {
                 })
                 .then(function(data) {
                     console.log(data);
+                    forecast.setAttribute("class", "border");
+                    forecast.setAttribute("class", " border-dark");
 
                     //Temp
                     newElement = document.createElement("p");
@@ -74,7 +75,8 @@ function generateWeatherData(inputValue) {
                 
                     //5-Day Forecast
                     for(var i = 0; i < futureForecast.length; ++i){
-                        console.log("Index " + i);
+                        futureForecast[i].setAttribute("class", "bg-dark");
+                        
                         //Date
                         newElement = document.createElement("h5");
                         currentDate = moment(dateNum.getFullYear() + "-" + (dateNum.getMonth()+1) + "-" + (dateNum.getDate()+2+i)).format("MM/DD/YYYY");
