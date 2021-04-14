@@ -1,6 +1,7 @@
 var inputText = document.querySelector("#input-text");
 var inputForm = document.querySelector("#input-form");
 var forecast = document.querySelector("#today-forecast");
+var futureForecast = document.getElementsByClassName(".forecast-day");
 
 function getApi(event) {
     event.preventDefault();
@@ -20,25 +21,6 @@ function getApi(event) {
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
-            // newElement = document.createElement("h1");
-            // newElement.textContent = data.name;
-            // forecast.appendChild(newElement);
-
-            // //Temp
-            // newElement = document.createElement("p");
-            // newElement.textContent = "Temp: " + data.main.temp + " °F";
-            // forecast.appendChild(newElement);
-
-            // //Wind
-            // newElement = document.createElement("p");
-            // newElement.textContent = "Wind: " + data.wind.speed + " MPH";
-            // forecast.appendChild(newElement);
-
-            // //Humidity
-            // newElement = document.createElement("p");
-            // newElement.textContent = "Humidity: " + data.main.humidity + " %";
-            // forecast.appendChild(newElement);
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ data.coord.lat +'&lon=' + data.coord.lon + '&units=imperial&appid=62fc4b9361922696dc4c18ebfc0a82b3')
                 .then(function (response) {
                     return response.json();
@@ -67,7 +49,35 @@ function getApi(event) {
                     //UV Index
                     newElement = document.createElement("p");
                     newElement.textContent = "UV Index: " + data.current.uvi;
+                    newElement.setAttribute("class", "text-white");
+                    if(data.current.uvi <= 2) {
+                        newElement.setAttribute("class", "bg-success");
+                    }
+                    else if(data.current.uvi <= 5) {
+                        newElement.setAttribute("class", "bg-warning");
+                    } else {
+                        newElement.setAttribute("class", "bg-danger");
+                    }
                     forecast.appendChild(newElement);
+                })
+                // 5-day Forecast
+                .then(function(data) {
+                    for(var i = 0; i < futureForecast.length; ++i){
+                        //Temp
+                        newElement = document.createElement("p");
+                        newElement.textContent = "Temp: " + data.daily[i].temp.day + " °F";
+                        futureForecast[i].appendChild(newElement);
+
+                        //Wind
+                        newElement = document.createElement("p");
+                        newElement.textContent = "Wind: " + data.daily[i].wind_speed + " MPH";
+                        futureForecast[i].appendChild(newElement);
+
+                        //Humidity
+                        newElement = document.createElement("p");
+                        newElement.textContent = "Humidity: " + data.daily[i].humidity + " %";
+                        futureForecast[i].appendChild(newElement);
+                    }
                 });
         })
 }
