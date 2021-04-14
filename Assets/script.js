@@ -32,9 +32,9 @@ function generateWeatherData(inputValue) {
         })
         .then(function (data) {
             //Creates buttons from local storage
-            var history = []
+            var history = [];
             history = JSON.parse(localStorage.getItem("history"));
-            if(history) {
+            if(history != null) {
                 var match = 0;
                 for(var i = 0; i < history.length; ++i) {
                     if(history[i] === inputValue) {
@@ -46,10 +46,10 @@ function generateWeatherData(inputValue) {
                 }
             }
             else {
-                history.push(inputValue);
+                history = [inputValue];
             }
             for(var i = 0; i < history.length; ++i) {
-                createHistoryButton(inputValue);
+                createHistoryButton(history[i]);
             }
             localStorage.setItem("history", JSON.stringify(history));
 
