@@ -1,11 +1,11 @@
 var inputText = document.querySelector("#input-text");
-var inputForm = document.querySelector("#input-form");
 var historyButtons = document.querySelector("#local-storage-buttons");
 var forecast = document.querySelector("#today-forecast");
 var futureForecast = document.getElementsByClassName("forecast-day");
 var label = document.querySelector("#label-5-day");
 var dateNum = new Date();
 var currentDate;
+var history = [];
 
 function getApi(event) {
     event.preventDefault();
@@ -35,7 +35,6 @@ function generateWeatherData(inputValue) {
         })
         .then(function (data) {
             //Creates buttons from local storage
-            var history = [];
             history = JSON.parse(localStorage.getItem("history"));
             if(history != null) {
                 var match = 0;
@@ -149,4 +148,12 @@ function createHistoryButton(inputValue) {
 function clearHistory(event) {
     event.preventDefault();
     localStorage.clear();
+}
+
+
+history = JSON.parse(localStorage.getItem("history"));
+if(history != null) {
+    for(var i = 0; i < history.length; ++i) {
+        createHistoryButton(history[i]);
+    }
 }
